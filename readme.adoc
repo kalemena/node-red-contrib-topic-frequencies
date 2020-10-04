@@ -1,0 +1,5 @@
+= Topic Frequencies
+
+Computes frequencies of events per topic on a sliding interval.
+
+This node is inspired by link:https://flows.nodered.org/node/node-red-contrib-metric-per-topic[node-red-contrib-metric-per-topic]
