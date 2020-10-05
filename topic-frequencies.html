@@ -1,0 +1,77 @@
+
+<script type="text/javascript">
+
+    RED.nodes.registerType('Topic Frequencies',{
+        category: 'function',
+        color: '#c13c3c',
+        self: this,
+
+        defaults: {
+            name: { value: "" },
+            units: { value: "minutes" },
+            interval: { value: 1 },
+            reportUnits: { value: "minutes" },
+            reportInterval: { value: 1 },
+            valueKey: { value: "payload" },
+            alignToClock: { value: true },
+            generator: { value: "internal" }
+        },
+        inputs: 1,
+        outputs: 2,
+        icon: "font-awesome/fa-heartbeat",
+        label: function() {
+            return this.name || "Topic Frequencies";
+        },
+
+        oneditprepare: function() {
+          let self = this._def;
+          $("#node-input-alignToClock").prop('checked', this.alignToClock);
+          console.log(this);
+        }
+
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Topic Frequencies">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-interval"><i class="icon-tag"></i> Period</label>
+        <input type="text" id="node-input-interval" placeholder="Interval">
+    </div>
+    <div class="form-row">
+        <label for="node-input-units"><i class="icon-tag"></i> Units</label>
+        <select id="node-input-units">
+            <option value="seconds">Second(s)</option>
+            <option value="minutes">Minute(s)</option>
+            <option value="hours">Hour(s)</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-reportInterval"><i class="icon-tag"></i> Report Period</label>
+        <input type="text" id="node-input-reportInterval" placeholder="ReportInterval">
+    </div>
+    <div class="form-row">
+        <label for="node-input-reportUnits"><i class="icon-tag"></i> Report Units</label>
+        <select id="node-input-reportUnits">
+            <option value="seconds">Second(s)</option>
+            <option value="minutes">Minute(s)</option>
+            <option value="hours">Hour(s)</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-value-key"><i class="icon-tag"></i> Value Key</label>
+        <input type="text" id="node-input-valueKey" placeholder="payload">
+    </div>
+    <div class="form-row">
+        <label for="node-input-alignToClock">&nbsp;</label>
+        <input type="checkbox" id="node-input-alignToClock" style="display: inline-block;width: auto;vertical-align: top;">
+        <label for="node-input-alignToClock" style="width: 70%;" >Align intervals with RTC?</label>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Topic Frequencies">
+
+</script>
