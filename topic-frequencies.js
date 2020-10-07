@@ -30,6 +30,12 @@ module.exports = function(RED) {
           msg.topics = {};
           msg.metricValues = metricValues; // FIXME: remove this
 
+          // computed fields
+          topicsIntervalCount = 0;
+          topicsIntervalMessageCount = 0;
+          topicsIntervalCountMin = undefined;
+          topicsIntervalCountMax = undefined;
+
           for (key in metricValues) {
             min = undefined;
             max = undefined;            
@@ -44,7 +50,7 @@ module.exports = function(RED) {
               });
 
             messageCount = metricValues[key].all().length;
-                       
+
             // Building message output
             msg.topics[key] = {};
             
@@ -54,8 +60,23 @@ module.exports = function(RED) {
             msg.topics[key].intervalCountMin = min;
             msg.topics[key].intervalCountMax = max;
             msg.topics[key].intervalMessageCount = messageCount;
+
+            // interval metrics cross-topics
+            topicsIntervalCount += count;
+            topicsIntervalMessageCount += messageCount;
+            if(topicsIntervalCountMin == undefined) topicsIntervalCountMin = min;
+            topicsIntervalCountMin = Math.min(topicsIntervalCountMin, min);
+            if(topicsIntervalCountMax == undefined) topicsIntervalCountMax = max;
+            topicsIntervalCountMax = Math.max(topicsIntervalCountMax, max);
           };
           
+          msg.global = {}
+          msg.global.intervalCount = topicsIntervalCount;
+          msg.global.intervalMessageCount = topicsIntervalMessageCount;
+          msg.global.intervalCountAvg = topicsIntervalCount / topicsIntervalMessageCount;
+          msg.global.intervalCountMin = topicsIntervalCountMin;
+          msg.global.intervalCountMax = topicsIntervalCountMax;
+
           msg.interval = parseInt(node.interval);
           msg.units = node.units;
           msg.alignToClock = node.alignToClock;
