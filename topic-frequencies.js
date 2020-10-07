@@ -32,13 +32,14 @@ module.exports = function(RED) {
 
           for (key in metricValues) {
             min = undefined;
-            max = -1;            
+            max = undefined;            
             let count = 0; metricValues[key].all().forEach(function(element, i) {
               count += element;
 
               // interval min/max metrics
               if(min == undefined) min = element;
               min = Math.min(min, element);
+              if(max == undefined) max = element;
               max = Math.max(max, element);
               });
 
