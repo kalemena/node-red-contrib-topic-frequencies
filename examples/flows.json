@@ -15,6 +15,7 @@
         "interval": 1,
         "reportUnits": "seconds",
         "reportInterval": "10",
+        "topicKey": "topic",
         "valueKey": "payload",
         "alignToClock": true,
         "generator": "internal",

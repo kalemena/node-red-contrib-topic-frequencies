@@ -17,10 +17,11 @@ module.exports = function(RED) {
         node.interval = config.interval;
         node.reportUnits = config.reportUnits;
         node.reportInterval = config.reportInterval;
+        node.topicKey = config.topicKey;
         node.valueKey = config.valueKey;
         node.alignToClock = config.alignToClock;
 
-        console.log("TopicFrequencies: " + node.reportInterval + " | " + node.reportUnits + " | " + node.alignToClock);
+        console.log(`TopicFrequencies: ${node.reportInterval}/${node.reportUnits} | clock=${node.alignToClock} | topic=${node.topicKey} | value=${node.valueKey}`);
 
         function measure() {
 
@@ -178,17 +179,26 @@ module.exports = function(RED) {
 
           } else {
             // Count messages
-            if (msg.topic==undefined) msg.topic="";
-            
-            if (metricValues[msg.topic]==undefined) {
-              var interval = intervalToMs(node.units, node.interval);
-              metricValues[msg.topic] = ExpireArray(interval);
+            topic = "NaN"
+            if(msg[node.topicKey]==undefined) {
+              if (msg.topic==undefined) 
+                topic="NaN";
+              else
+                topic=msg.topic;
+            } else {
+              topic=msg[node.topicKey];
             }
 
             var value = 1; // default
             if((msg[node.valueKey]!=undefined) && !isNaN(msg.payload))
-              value = Number(msg[node.valueKey]);
-            metricValues[msg.topic].push(value);
+              value = Number(msg[node.valueKey]);            
+            
+            if (metricValues[topic]==undefined) {
+              var interval = intervalToMs(node.units, node.interval);
+              metricValues[topic] = ExpireArray(interval);
+            }
+            
+            metricValues[topic].push(value);
 
             showCount();
             node.send([null, msg]);

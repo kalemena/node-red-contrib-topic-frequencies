@@ -12,6 +12,7 @@
             interval: { value: 1 },
             reportUnits: { value: "minutes" },
             reportInterval: { value: 1 },
+            topicKey: { value: "topic" },
             valueKey: { value: "payload" },
             alignToClock: { value: true },
             generator: { value: "internal" }
@@ -60,6 +61,10 @@
             <option value="minutes">Minute(s)</option>
             <option value="hours">Hour(s)</option>
         </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-topicKey"><i class="icon-tag"></i>Topic Key</label>
+        <input type="text" id="node-input-topicKey" placeholder="topic">
     </div>
     <div class="form-row">
         <label for="node-input-valueKey"><i class="icon-tag"></i>Value Key</label>
