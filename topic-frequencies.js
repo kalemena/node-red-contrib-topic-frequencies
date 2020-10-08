@@ -24,7 +24,7 @@ module.exports = function(RED) {
 
         function measure() {
 
-          console.log("TopicFrequencies: " + new Date() + " > " + node.interval + " | " + node.units);
+          console.log(`TopicFrequencies: ${new Date()} > ${node.interval} | ${node.units}`);
 
           msg = {};
           msg.topics = {};
