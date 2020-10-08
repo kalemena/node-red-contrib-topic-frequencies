@@ -71,12 +71,12 @@ module.exports = function(RED) {
             topicsIntervalCountMax = Math.max(topicsIntervalCountMax, max);
           };
           
-          msg.global = {}
-          msg.global.intervalCount = topicsIntervalCount;
-          msg.global.intervalMessageCount = topicsIntervalMessageCount;
-          msg.global.intervalCountAvg = topicsIntervalCount / topicsIntervalMessageCount;
-          msg.global.intervalCountMin = topicsIntervalCountMin;
-          msg.global.intervalCountMax = topicsIntervalCountMax;
+          msg.topics['<all>'] = {}
+          msg.topics['<all>'].intervalCount = topicsIntervalCount;
+          msg.topics['<all>'].intervalCountAvg = topicsIntervalCount / topicsIntervalMessageCount;
+          msg.topics['<all>'].intervalCountMin = topicsIntervalCountMin;
+          msg.topics['<all>'].intervalCountMax = topicsIntervalCountMax;
+          msg.topics['<all>'].intervalMessageCount = topicsIntervalMessageCount;
 
           msg.interval = parseInt(node.interval);
           msg.units = node.units;
