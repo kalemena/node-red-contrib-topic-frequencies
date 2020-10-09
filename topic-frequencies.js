@@ -10,6 +10,7 @@ module.exports = function(RED) {
        
         // Cache for events per topic
         var metricValues = {};
+        var nodeCycles = 0;
 
         // Initialize node
         node.status({ });
@@ -27,6 +28,8 @@ module.exports = function(RED) {
 
           console.log(`TopicFrequencies: ${new Date()} > ${node.interval} | ${node.units}`);
 
+          nodeCycles++;
+
           msg = {};
           msg.topics = {};
           msg.metricValues = metricValues; // FIXME: remove this
@@ -36,7 +39,7 @@ module.exports = function(RED) {
           topicsIntervalMessageCount = 0;
           topicsIntervalCountMin = undefined;
           topicsIntervalCountMax = undefined;
-
+         
           for (key in metricValues) {
             min = undefined;
             max = undefined;            
@@ -78,6 +81,7 @@ module.exports = function(RED) {
           msg.topics['<all>'].intervalCountMax = topicsIntervalCountMax;
           msg.topics['<all>'].intervalMessageCount = topicsIntervalMessageCount;
 
+          msg.cycles = nodeCycles;
           msg.interval = parseInt(node.interval);
           msg.units = node.units;
           msg.alignToClock = node.alignToClock;
