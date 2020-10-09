@@ -3,3 +3,41 @@
 Computes frequencies of events per topic on a sliding interval.
 
 This node is inspired by link:https://flows.nodered.org/node/node-red-contrib-metric-per-topic[node-red-contrib-metric-per-topic]
+
+image:docs/example-flow.png[Example Flow]
+
+== Sample 
+
+[source,json]
+----
+{
+    "topics": {
+        "toto": {
+            "intervalCount": 125,
+            "intervalCountAvg": 5.681818181818182,
+            "intervalCountMin": 5,
+            "intervalCountMax": 10,
+            "intervalMessageCount": 22
+        },
+        "titi": {
+            "intervalCount": 10,
+            "intervalCountAvg": 10,
+            "intervalCountMin": 10,
+            "intervalCountMax": 10,
+            "intervalMessageCount": 1
+        },
+        "<all>": {
+            "intervalCount": 135,
+            "intervalCountAvg": 5.869565217391305,
+            "intervalCountMin": 5,
+            "intervalCountMax": 10,
+            "intervalMessageCount": 23
+        }
+    },
+    "cycles": 2,
+    "interval": 1,
+    "units": "minutes",
+    "alignToClock": true,
+    "_msgid": "f5cbef68.073d1"
+}
+----
