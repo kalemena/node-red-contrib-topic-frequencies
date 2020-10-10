@@ -84,8 +84,10 @@ module.exports = function(RED) {
           msg.cycles = nodeCycles;
           msg.interval = parseInt(node.interval);
           msg.units = node.units;
+          msg.topicKey = node.topicKey;
+          msg.valueKey = node.valueKey;
           msg.alignToClock = node.alignToClock;
-         
+          
           node.send([msg, null]);
           showCount();
         }
@@ -159,6 +161,26 @@ module.exports = function(RED) {
           node.status({ fill: "green", shape: "dot", text: `` });
         };
 
+        function isSet(object, string) {
+          if (!object) return false;
+          var childs = string.split('.');
+          if(childs.length == 1) {
+            return (object[childs[0]] != undefined);
+          } else {
+            return isSet(object[childs[0]], string.substring(childs[0].length+1));
+          }
+        }
+
+        function resolve(object, string) {
+          if (!object) return undefined;
+          var childs = string.split('.');
+          if(childs.length == 1) {
+            return object[childs[0]]; // maybe undefined
+          } else {
+            return resolve(object[childs[0]], string.substring(childs[0].length+1));
+          }
+        }
+
         showCount();
         startGenerator();
 
@@ -183,19 +205,22 @@ module.exports = function(RED) {
 
           } else {
             // Count messages
-            topic = "NaN"
-            if(msg[node.topicKey]==undefined) {
-              if (msg.topic==undefined) 
+            topic = resolve(msg, node.topicKey);
+            if(topic==undefined) {
+              if(msg.topic==undefined) 
                 topic="NaN";
               else
                 topic=msg.topic;
-            } else {
-              topic=msg[node.topicKey];
             }
 
-            var value = 1; // default
-            if((msg[node.valueKey]!=undefined) && !isNaN(msg.payload))
-              value = Number(msg[node.valueKey]);            
+            var value = resolve(msg, node.valueKey);
+            if(value == undefined || isNaN(value)) {
+              // fallback to msg.payload
+              if(msg.payload == undefined || isNaN(msg.payload)) 
+                value = 1; // fallback to 1
+              else
+                value = Number(value);
+            }
             
             if (metricValues[topic]==undefined) {
               var interval = intervalToMs(node.units, node.interval);
