@@ -15,8 +15,8 @@
         "interval": 1,
         "reportUnits": "seconds",
         "reportInterval": "10",
-        "topicKey": "topic",
-        "valueKey": "payload",
+        "topicKey": "payload.uniqueid",
+        "valueKey": "payload.temp",
         "alignToClock": true,
         "generator": "internal",
         "x": 630,
@@ -38,19 +38,15 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "30",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "toto",
-        "payload": "15",
-        "payloadType": "num",
+        "topic": "",
+        "payload": "{\"uniqueid\":\"toto\",\"temp\":15}",
+        "payloadType": "json",
         "x": 320,
         "y": 260,
         "wires": [
@@ -101,19 +97,15 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "15",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "titi",
-        "payload": "10",
-        "payloadType": "num",
+        "topic": "",
+        "payload": "{\"uniqueid\":\"titi\",\"temp\":10}",
+        "payloadType": "json",
         "x": 320,
         "y": 340,
         "wires": [
@@ -159,19 +151,15 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "toto",
-        "payload": "10",
-        "payloadType": "num",
+        "topic": "",
+        "payload": "{\"uniqueid\":\"toto\",\"temp\":10}",
+        "payloadType": "json",
         "x": 320,
         "y": 220,
         "wires": [
@@ -188,19 +176,15 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "1",
         "crontab": "",
         "once": false,
         "onceDelay": "1",
-        "topic": "toto",
-        "payload": "5",
-        "payloadType": "num",
+        "topic": "",
+        "payload": "{\"uniqueid\":\"toto\",\"temp\":5}",
+        "payloadType": "json",
         "x": 320,
         "y": 180,
         "wires": [
