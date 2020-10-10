@@ -6,38 +6,65 @@ This node is inspired by link:https://flows.nodered.org/node/node-red-contrib-me
 
 image:docs/example-flow.png[Example Flow]
 
-== Sample 
+== Testing
 
+The repo comes with simple Docker environment for testing.
+
+.Build
+[source,bash]
+----
+$ docker-compose build
+----
+
+.Start
+[source,bash]
+----
+$ docker-compose up -d
+----
+
+.Browse to link:http://localhost:2880[]
+
+.Edit Flow and check debug window on the right for metric messages
+
+.Stop
+[source,bash]
+----
+$ docker-compose down
+----
+
+.Sample output
 [source,json]
 ----
 {
     "topics": {
         "toto": {
-            "intervalCount": 125,
-            "intervalCountAvg": 5.681818181818182,
+            "intervalCount": 450,
+            "intervalCountAvg": 6.081081081081081,
             "intervalCountMin": 5,
-            "intervalCountMax": 10,
-            "intervalMessageCount": 22
+            "intervalCountMax": 15,
+            "intervalMessageCount": 74
         },
         "titi": {
-            "intervalCount": 10,
+            "intervalCount": 40,
             "intervalCountAvg": 10,
             "intervalCountMin": 10,
             "intervalCountMax": 10,
-            "intervalMessageCount": 1
+            "intervalMessageCount": 4
         },
         "<all>": {
-            "intervalCount": 135,
-            "intervalCountAvg": 5.869565217391305,
+            "intervalCount": 490,
+            "intervalCountAvg": 6.282051282051282,
             "intervalCountMin": 5,
-            "intervalCountMax": 10,
-            "intervalMessageCount": 23
+            "intervalCountMax": 15,
+            "intervalMessageCount": 78
         }
     },
-    "cycles": 2,
+    "cycles": 2476,
     "interval": 1,
     "units": "minutes",
+    "topicKey": "payload.uniqueid",
+    "valueKey": "payload.temp",
     "alignToClock": true,
-    "_msgid": "f5cbef68.073d1"
+    "_msgid": "b1bb6c79.43cb4"
 }
 ----
