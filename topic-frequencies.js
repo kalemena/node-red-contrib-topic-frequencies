@@ -12,6 +12,8 @@ module.exports = function(RED) {
         var metricValues = {};
         var nodeCycles = 0;
 
+        var tempGlobal = {};
+
         // Initialize node
         node.status({ });
         node.units = config.units;
@@ -80,6 +82,9 @@ module.exports = function(RED) {
           msg.topics['<all>'].min = topicsIntervalCountMin;
           msg.topics['<all>'].max = topicsIntervalCountMax;
           msg.topics['<all>'].elements = topicsIntervalMessageCount;
+
+          // update cache
+          tempGlobal = msg.topics['<all>'];
 
           msg.cycles = nodeCycles;
           msg.interval = parseInt(node.interval);
@@ -158,8 +163,7 @@ module.exports = function(RED) {
         }
 
         function showCount() {
-          // node.status({ fill: "green", shape: "dot", text: `${ctrGlobalCount} / ${ctrGlobalMessageCount}` });
-          node.status({ fill: "green", shape: "dot", text: `` });
+          node.status({ fill: "green", shape: "dot", text: `${tempGlobal.sum} / ${tempGlobal.elements}` });
         };
 
         function isSet(object, string) {
