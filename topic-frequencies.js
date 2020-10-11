@@ -32,7 +32,7 @@ module.exports = function(RED) {
 
           msg = {};
           msg.topics = {};
-          msg.metricValues = metricValues; // FIXME: remove this
+          // msg.metricValues = metricValues;
 
           // computed fields
           topicsIntervalCount = 0;
@@ -59,11 +59,11 @@ module.exports = function(RED) {
             msg.topics[key] = {};
             
             // interval metrics for topic
-            msg.topics[key].intervalCount = count;
-            msg.topics[key].intervalCountAvg = count / messageCount;
-            msg.topics[key].intervalCountMin = min;
-            msg.topics[key].intervalCountMax = max;
-            msg.topics[key].intervalMessageCount = messageCount;
+            msg.topics[key].sum = count;
+            msg.topics[key].avg = count / messageCount;
+            msg.topics[key].min = min;
+            msg.topics[key].max = max;
+            msg.topics[key].elements = messageCount;
 
             // interval metrics cross-topics
             topicsIntervalCount += count;
@@ -75,11 +75,11 @@ module.exports = function(RED) {
           };
           
           msg.topics['<all>'] = {}
-          msg.topics['<all>'].intervalCount = topicsIntervalCount;
-          msg.topics['<all>'].intervalCountAvg = topicsIntervalCount / topicsIntervalMessageCount;
-          msg.topics['<all>'].intervalCountMin = topicsIntervalCountMin;
-          msg.topics['<all>'].intervalCountMax = topicsIntervalCountMax;
-          msg.topics['<all>'].intervalMessageCount = topicsIntervalMessageCount;
+          msg.topics['<all>'].sum = topicsIntervalCount;
+          msg.topics['<all>'].avg = topicsIntervalCount / topicsIntervalMessageCount;
+          msg.topics['<all>'].min = topicsIntervalCountMin;
+          msg.topics['<all>'].max = topicsIntervalCountMax;
+          msg.topics['<all>'].elements = topicsIntervalMessageCount;
 
           msg.cycles = nodeCycles;
           msg.interval = parseInt(node.interval);
@@ -94,6 +94,7 @@ module.exports = function(RED) {
 
         function reset() {
           metricValues = {};
+          nodeCycles = 0;
         }
 
         function getRemainingMs(units, interval) {

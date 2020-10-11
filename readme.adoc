@@ -45,25 +45,25 @@ $ docker-compose down
 {
     "topics": {
         "toto": {
-            "intervalCount": 450,
-            "intervalCountAvg": 6.081081081081081,
-            "intervalCountMin": 5,
-            "intervalCountMax": 15,
-            "intervalMessageCount": 74
+            "sum": 450,
+            "avg": 6.081081081081081,
+            "min": 5,
+            "max": 15,
+            "elements": 74
         },
         "titi": {
-            "intervalCount": 40,
-            "intervalCountAvg": 10,
-            "intervalCountMin": 10,
-            "intervalCountMax": 10,
-            "intervalMessageCount": 4
+            "sum": 40,
+            "avg": 10,
+            "min": 10,
+            "max": 10,
+            "elements": 4
         },
         "<all>": {
-            "intervalCount": 490,
-            "intervalCountAvg": 6.282051282051282,
-            "intervalCountMin": 5,
-            "intervalCountMax": 15,
-            "intervalMessageCount": 78
+            "sum": 490,
+            "avg": 6.282051282051282,
+            "min": 5,
+            "max": 15,
+            "elements": 78
         }
     },
     "cycles": 2476,
