@@ -4,6 +4,13 @@ Computes frequencies of events per topic on a sliding interval.
 
 This node is inspired by link:https://flows.nodered.org/node/node-red-contrib-metric-per-topic[node-red-contrib-metric-per-topic]
 
+.Key features:
+- Passthrough node, capturing metrics and let original message pass through
+- Interval is sliding time window, allowing to report anytime and always have full *interval* data metrics
+- Ability to specify *topic key* and *value key* measured, as JSON dot path (e.g. *payload.uniqueid*)
+- Ability to specify *report* scheduler, distinct from *interval*
+- Ability to *control* few operations, like *reset* counters, which can be triggered by Input node
+
 image:docs/example-flow.png[Example Flow]
 
 == Testing
