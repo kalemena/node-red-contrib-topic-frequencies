@@ -24,10 +24,14 @@
     "type": "git",
     "url": "git+https://github.com/kalemena/node-red-contrib-topic-frequencies.git"
   },
-  "author": "Kalemena <dev@kalemena.net>",
+  "author": "kalemena <npm.dev@kalemena.net>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kalemena/node-red-contrib-topic-frequencies/issues"
   },
-  "homepage": "https://github.com/kalemena/node-red-contrib-topic-frequencies#readme"
+  "homepage": "https://github.com/kalemena/node-red-contrib-topic-frequencies#readme",
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  }
 }
