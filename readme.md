@@ -1,47 +1,44 @@
-= Topic Frequencies
+# Topic Frequencies
 
 Computes frequencies of events per topic on a sliding interval.
 
 This node is inspired by link:https://flows.nodered.org/node/node-red-contrib-metric-per-topic[node-red-contrib-metric-per-topic]
 
-.Key features:
+## Documentation
+
+Key features:
+
 - Passthrough node, capturing metrics and let original message pass through
 - Interval is sliding time window, allowing to report anytime and always have full *interval* data metrics
 - Ability to specify *topic key* and *value key* measured, as JSON dot path (e.g. *payload.uniqueid*)
 - Ability to specify *report* scheduler, distinct from *interval*
 - Ability to *control* few operations, like *reset* counters, which can be triggered by Input node
 
-image:docs/example-flow.png[Example Flow]
+![Example Flow](docs/example-flow.png "Example Flow")
 
-== Testing
+## Testing
 
 The repo comes with simple Docker environment for testing.
 
-.Build
-[source,bash]
-----
-$ docker-compose build
-----
+Build:
 
-.Start
-[source,bash]
-----
-$ docker-compose up -d
-----
+    $ docker-compose build
 
-.Browse to link:http://localhost:2880[]
+Start:
 
-.Edit Flow and check debug window on the right for metric messages
+    $ docker-compose up -d
 
-.Stop
-[source,bash]
-----
-$ docker-compose down
-----
+Browse to link:http://localhost:2880[]
 
-.Sample output
-[source,json]
-----
+Edit Flow and check debug window on the right for metric messages
+
+Stop:
+
+    $ docker-compose down
+
+Sample output:
+
+```javascript
 {
     "topics": {
         "toto": {
@@ -74,4 +71,4 @@ $ docker-compose down
     "alignToClock": true,
     "_msgid": "b1bb6c79.43cb4"
 }
-----
+```
