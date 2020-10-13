@@ -1,8 +1,10 @@
+![Publish](https://github.com/kalemena/node-red-contrib-topic-frequencies/workflows/Publish/badge.svg)
+
 # Topic Frequencies
 
 Computes frequencies of events per topic on a sliding interval.
 
-This node is inspired by link:https://flows.nodered.org/node/node-red-contrib-metric-per-topic[node-red-contrib-metric-per-topic]
+This node is inspired by [node-red-contrib-metric-per-topic](https://flows.nodered.org/node/node-red-contrib-metric-per-topic)
 
 ## Documentation
 
@@ -11,7 +13,7 @@ Key features:
 - Passthrough node, capturing metrics and let original message pass through
 - Interval is sliding time window, allowing to report anytime and always have full *interval* data metrics
 - Ability to specify *topic key* and *value key* measured, as JSON dot path (e.g. *payload.uniqueid*)
-- Ability to specify *report* scheduler, distinct from *interval*
+- Ability to specify *report* scheduler, distinct from *interval* used to measure frequencies
 - Ability to *control* few operations, like *reset* counters, which can be triggered by Input node
 
 ![Example Flow](docs/example-flow.png "Example Flow")
@@ -28,7 +30,7 @@ Start:
 
     $ docker-compose up -d
 
-Browse to link:http://localhost:2880[]
+Browse to [http://localhost:2880](http://localhost:2880)
 
 Edit Flow and check debug window on the right for metric messages
 
