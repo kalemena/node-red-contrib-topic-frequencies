@@ -91,7 +91,7 @@ module.exports = function(RED) {
           msg.units = node.units;
           msg.topicKey = node.topicKey;
           msg.valueKey = node.valueKey;
-          msg.alignToClock = node.alignToClock;
+          // msg.alignToClock = node.alignToClock;
           
           node.send([msg, null]);
           showCount();
