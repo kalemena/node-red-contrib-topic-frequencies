@@ -70,7 +70,6 @@ Sample output:
     "units": "minutes",
     "topicKey": "payload.uniqueid",
     "valueKey": "payload.temp",
-    "alignToClock": true,
     "_msgid": "b1bb6c79.43cb4"
 }
 ```

@@ -63,6 +63,11 @@
         </select>
     </div>
     <div class="form-row">
+        <label for="node-input-alignToClock">&nbsp;</label>
+        <input type="checkbox" id="node-input-alignToClock" style="display: inline-block;width: auto;vertical-align: top;">
+        <label for="node-input-alignToClock" style="width: 70%;" >Align report intervals with RTC?</label>
+    </div>
+    <div class="form-row">
         <label for="node-input-topicKey"><i class="icon-tag"></i>Topic Key (msg.)</label>
         <input type="text" id="node-input-topicKey" placeholder="topic">
     </div>
@@ -70,13 +75,138 @@
         <label for="node-input-valueKey"><i class="icon-tag"></i>Value Key (msg.)</label>
         <input type="text" id="node-input-valueKey" placeholder="payload">
     </div>
-    <div class="form-row">
-        <label for="node-input-alignToClock">&nbsp;</label>
-        <input type="checkbox" id="node-input-alignToClock" style="display: inline-block;width: auto;vertical-align: top;">
-        <label for="node-input-alignToClock" style="width: 70%;" >Align intervals with RTC?</label>
-    </div>
 </script>
 
 <script type="text/x-red" data-help-name="Topic Frequencies">
-
+    <p>Computes frequencies of events per topic on a sliding interval.</p>
+    <p><strong>Configuration</strong></p>
+    <ul>
+        <li>
+            <p><em>Period</em></p>
+            <p>Specfies period for the interval.</p>
+        </li>
+        <li>
+            <p><em>Units</em></p>
+            <p>Specfies unit matching the <em>Period</em> field.</p>
+        </li>
+        <li>
+            <p><em>Report Period</em></p>
+            <p>Specfies report period for the interval.</p>
+        </li>
+        <li>
+            <p><em>Report Units</em></p>
+            <p>Specfies unit matching the <em>Report Period</em> field.</p>
+        </li>
+        <li>
+            <p><em>Align report intervals with RTC?</em></p>
+            <p>Specfies if reports should alogn with clock time.</p>
+        </li>
+        <li>
+            <p><em>Topic Key</em></p>
+            <p>Specifies Key to use as topic. Defaults to <em>msg.topic</em> if numeric, or blank.</p>
+        </li>
+        <li>
+            <p><em>Value Key</em></p>
+            <p>Specifies Key to use as measure. Defaults to <em>msg.payload</em> if numeric, or otherwise defaults to 1.</p>
+        </li>
+    </ul>
+    <p><strong>Input</strong></p>
+    <ul>
+        <li>
+            <p><em>msg</em></p>
+            <p>Full message in which <em>topicKey</em> and <em>valueKey</em> should be defined.</p>
+        </li>
+    </ul>
+    <p><strong>Output</strong></p>
+    <p>The node has two outputs.</p>
+    <ul>
+        <li>
+            <p><em>Output 1</em></p>
+            <p>Generates summary message on each report interval.</br>The payload is an object with the min, max, avg, sum and elements per topic.</p>
+        </li>
+        <li>
+            <p><em>Output 2</em></p>
+            <p>Repeats incoming message as passthrough.</p>
+        </li>
+    </ul>
+    <p>Output Schema</p>
+    <pre class="language-text">{
+    &quot;payload&quot;: {
+        "topics": {
+            "&lt;topicname1&gt;": {
+                "sum": 450,
+                "avg": 6.081081081081081,
+                "min": 5,
+                "max": 15,
+                "elements": 74
+            },
+            ...
+            "<all>": {
+                "sum": 490,
+                "avg": 6.282051282051282,
+                "min": 5,
+                "max": 15,
+                "elements": 78
+            }
+        },
+        "cycles": 2476,
+        "interval": 1,
+        "units": "minutes",
+        "topicKey": "payload.uniqueid",
+        "valueKey": "payload.temp",
+        "_msgid": "b1bb6c79.43cb4"
+    }
+    </pre>
+    <table>
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>cycles</td>
+                <td>Number of reports generated</td>
+            </tr>
+            <tr>
+                <td>interval</td>
+                <td>Repeats configuration <em>Interval</em></td>
+            </tr>
+            <tr>
+                <td>units</td>
+                <td>Repeats configuration <em>Unit</em></td>
+            </tr>
+            <tr>
+                <td>topicKey</td>
+                <td>Repeats configuration <em>TopicKey</em></td>
+            </tr>
+            <tr>
+                <td>valueKey</td>
+                <td>Repeats configuration <em>ValueKey</em></td>
+            </tr>
+            <tr>
+                <td>topics</td>
+                <td>Array of each topic key metrics, plus the <em>&lt;all&gt;</em> measuring all topics together: </br>
+                    <ul>
+                        <li>
+                            <em>min</em>: Min of <em>valueKey</em> during the sliding <em>interval</em>.
+                        </li>
+                        <li>
+                            <em>max</em>: Max of <em>valueKey</em> during the sliding <em>interval</em>.
+                        </li>
+                        <li>
+                            <em>sum</em>: Sum of <em>valueKey</em> during the sliding <em>interval</em>.
+                        </li>
+                        <li>
+                            <em>avg</em>: Average of <em>valueKey</em> during the sliding <em>interval</em>.
+                        </li>
+                        <li>
+                            <em>elements</em>: Number of elements (aka events) during the sliding <em>interval</em>.
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </script>
