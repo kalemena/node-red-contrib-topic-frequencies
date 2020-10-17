@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-topic-frequencies",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Computes frequencies of events per topic on a sliding interval.",
   "dependencies": {
     "expire-array": "^1.1.0"
