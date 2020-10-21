@@ -62,7 +62,7 @@ module.exports = function(RED) {
             
             // interval metrics for topic
             msg.topics[key].sum = count;
-            msg.topics[key].avg = count / messageCount;
+            msg.topics[key].avg = parseFloat(count / messageCount).toFixed( 2 );
             msg.topics[key].min = min;
             msg.topics[key].max = max;
             msg.topics[key].elements = messageCount;
@@ -78,7 +78,7 @@ module.exports = function(RED) {
           
           msg.topics['<all>'] = {}
           msg.topics['<all>'].sum = topicsIntervalCount;
-          msg.topics['<all>'].avg = topicsIntervalCount / topicsIntervalMessageCount;
+          msg.topics['<all>'].avg = parseFloat(topicsIntervalCount / topicsIntervalMessageCount).toFixed( 2 );
           msg.topics['<all>'].min = topicsIntervalCountMin;
           msg.topics['<all>'].max = topicsIntervalCountMax;
           msg.topics['<all>'].elements = topicsIntervalMessageCount;
@@ -94,7 +94,7 @@ module.exports = function(RED) {
           // msg.alignToClock = node.alignToClock;
           
           node.send([msg, null]);
-          showCount();
+          showCount(msg.topics['<all>'].sum, msg.topics['<all>'].avg, msg.topics['<all>'].min, msg.topics['<all>'].max, msg.topics['<all>'].elements);
         }
 
         function reset() {
@@ -162,8 +162,8 @@ module.exports = function(RED) {
             };
         }
 
-        function showCount() {
-          node.status({ fill: "green", shape: "dot", text: `${tempGlobal.sum} / ${tempGlobal.elements}` });
+        function showCount(sum, avg, min, max, elements) {
+          node.status({ fill: "green", shape: "dot", text: `sum:${sum} / avg:${avg} / min:${min} / max:${max} / elements:${elements}` });
         };
 
         function isSet(object, string) {
@@ -186,7 +186,7 @@ module.exports = function(RED) {
           }
         }
 
-        showCount();
+        showCount(0,0,0,0,0);
         startGenerator();
 
         this.on('input', function(msg) {
@@ -234,7 +234,8 @@ module.exports = function(RED) {
             
             metricValues[topic].push(value);
 
-            showCount();
+            measure();
+
             node.send([null, msg]);
           }
         });
