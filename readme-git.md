@@ -18,9 +18,27 @@ Key features:
 
 ![Example Flow](docs/example-flow.png "Example Flow")
 
-See [documentation](https://github.com/kalemena/node-red-contrib-topic-frequencies/blob/main/readme-git.md)
+## Testing
 
-## Sample output:
+The repo comes with simple Docker environment for testing.
+
+Build:
+
+    $ docker-compose build
+
+Start:
+
+    $ docker-compose up -d
+
+Browse to [http://localhost:2880](http://localhost:2880)
+
+Edit Flow and check debug window on the right for metric messages
+
+Stop:
+
+    $ docker-compose down
+
+Sample output:
 
 ```javascript
 {
@@ -52,6 +70,7 @@ See [documentation](https://github.com/kalemena/node-red-contrib-topic-frequenci
     "units": "minutes",
     "topicKey": "payload.uniqueid",
     "valueKey": "payload.temp",
+    "alignToClock": true,
     "_msgid": "b1bb6c79.43cb4"
 }
 ```
