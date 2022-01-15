@@ -1,6 +1,9 @@
-node_modules
-docs
-*.yml
-Dockerfile
-*.backup
-.npmignore
+# Ignore everything
+*
+# But these ...
+!package.json
+!topic-frequencies.*
+!readme.md
+!LICENSE
+!examples
+!docs
