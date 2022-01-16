@@ -62,7 +62,7 @@ module.exports = function(RED) {
             
             // interval metrics for topic
             msg.topics[key].sum = count;
-            msg.topics[key].avg = parseFloat(count / messageCount).toFixed( 2 );
+            msg.topics[key].avg = Number(parseFloat(count / messageCount).toFixed( 2 ));
             msg.topics[key].min = min;
             msg.topics[key].max = max;
             msg.topics[key].elements = messageCount;
@@ -78,7 +78,7 @@ module.exports = function(RED) {
           
           msg.topics['<all>'] = {}
           msg.topics['<all>'].sum = topicsIntervalCount;
-          msg.topics['<all>'].avg = parseFloat(topicsIntervalCount / topicsIntervalMessageCount).toFixed( 2 );
+          msg.topics['<all>'].avg = Number(parseFloat(topicsIntervalCount / topicsIntervalMessageCount).toFixed( 2 ));
           msg.topics['<all>'].min = topicsIntervalCountMin;
           msg.topics['<all>'].max = topicsIntervalCountMax;
           msg.topics['<all>'].elements = topicsIntervalMessageCount;
