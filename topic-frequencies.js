@@ -234,8 +234,6 @@ module.exports = function(RED) {
             
             metricValues[topic].push(value);
 
-            measure();
-
             node.send([null, msg]);
           }
         });
