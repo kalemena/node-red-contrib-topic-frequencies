@@ -19,7 +19,7 @@
         "valueKey": "payload.temp",
         "alignToClock": true,
         "generator": "internal",
-        "x": 630,
+        "x": 610,
         "y": 260,
         "wires": [
             [
